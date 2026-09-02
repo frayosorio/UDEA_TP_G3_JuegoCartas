@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,12 +47,14 @@ public class FrmJuego extends JFrame {
         });
     }
 
-    private void repartir() {
-        pnlJugador1.removeAll();
-        Carta cartaDeLaSuerte = new Carta(new Random());
-        cartaDeLaSuerte.mostrar(pnlJugador1, 10, 10);
-        pnlJugador1.repaint();
+    Jugador jugador1 = new Jugador();
+    Jugador jugador2 = new Jugador();
 
+    private void repartir() {
+        jugador1.repartir();
+        jugador2.repartir();
+        jugador1.mostrar(pnlJugador1);
+        jugador2.mostrar(pnlJugador2);
     }
 
 }
