@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -6,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class FrmJuego extends JFrame {
+
+    // variables globales
+    JPanel pnlJugador1, pnlJugador2;
 
     public FrmJuego() {
         setSize(500, 300);
@@ -27,13 +31,29 @@ public class FrmJuego extends JFrame {
         tpJugadores.setBounds(10, 45, 470, 200);
         add(tpJugadores);
 
-        JPanel pnlJugador1 = new JPanel();
+        pnlJugador1 = new JPanel();
         tpJugadores.add("Martín Estrada Contreras", pnlJugador1);
         pnlJugador1.setBackground(new Color(0, 255, 0));
+        pnlJugador1.setLayout(null);
 
-        JPanel pnlJugador2 = new JPanel();
+        pnlJugador2 = new JPanel();
         tpJugadores.add("Raúl Vidal", pnlJugador2);
         pnlJugador2.setBackground(new Color(0, 255, 255));
+        pnlJugador2.setLayout(null);
+
+        // eventos
+
+        btnRepartir.addActionListener(evento -> {
+            repartir();
+        });
+    }
+
+    private void repartir() {
+        pnlJugador1.removeAll();
+        Carta cartaDeLaSuerte = new Carta(new Random());
+        cartaDeLaSuerte.mostrar(pnlJugador1, 10, 10);
+        pnlJugador1.repaint();
+
     }
 
 }
