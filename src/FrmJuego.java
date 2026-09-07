@@ -2,13 +2,15 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class FrmJuego extends JFrame {
 
     // variables globales
-    JPanel pnlJugador1, pnlJugador2;
+    private JPanel pnlJugador1, pnlJugador2;
+    private JTabbedPane tpJugadores;
 
     public FrmJuego() {
         setSize(500, 300);
@@ -26,7 +28,7 @@ public class FrmJuego extends JFrame {
 
         // Definir una interfaz con varios paneles agrupados mediante pestañas
 
-        JTabbedPane tpJugadores = new JTabbedPane();
+        tpJugadores = new JTabbedPane();
         tpJugadores.setBounds(10, 45, 470, 200);
         add(tpJugadores);
 
@@ -45,6 +47,10 @@ public class FrmJuego extends JFrame {
         btnRepartir.addActionListener(evento -> {
             repartir();
         });
+
+        btnVerificar.addActionListener(evento -> {
+            verificar();
+        });
     }
 
     Jugador jugador1 = new Jugador();
@@ -55,6 +61,21 @@ public class FrmJuego extends JFrame {
         jugador2.repartir();
         jugador1.mostrar(pnlJugador1);
         jugador2.mostrar(pnlJugador2);
+    }
+
+    private void verificar(){
+        String gruposEncontrados="";
+        switch (tpJugadores.getSelectedIndex()) {
+            case 0:
+                gruposEncontrados=jugador1.getGrupos();
+                break;
+            case 1:
+                gruposEncontrados=jugador2.getGrupos();
+                break;
+        }
+        if(gruposEncontrados!=""){
+            JOptionPane.showMessageDialog(null, gruposEncontrados);
+        }
     }
 
 }

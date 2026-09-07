@@ -29,4 +29,33 @@ public class Jugador {
 
     }
 
+    public String getGrupos() {
+        String respuesta = "No se encontraron grupos";
+
+        // arreglo de contadores de cartas por el nombre
+        int[] contadores = new int[NombreCarta.values().length];
+
+        boolean hayGrupos = false;
+        for (Carta carta : cartas) {
+            int posicion = carta.getNombre().ordinal();
+            contadores[posicion]++;
+            if (!hayGrupos && contadores[posicion] >= 2)
+                hayGrupos = true;
+        }
+
+        if (hayGrupos) {
+            respuesta = "Se encontraron los siguientes grupos:\n";
+            for (int i=0;i<contadores.length;i++) {
+            //for (int contador : contadores) {
+                //if (contador >= 2) {
+                if (contadores[i] >= 2) {
+                    //respuesta += Grupo.values()[contador] + " de "+ NombreCarta.values()[] + "\n";
+                    respuesta += Grupo.values()[contadores[i]] + " de "+ NombreCarta.values()[i] + "\n";
+                }
+            }
+        }
+
+        return respuesta;
+    }
+
 }
